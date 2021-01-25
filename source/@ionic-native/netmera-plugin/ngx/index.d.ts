@@ -1,28 +1,11 @@
 import { IonicNativePlugin } from '@ionic-native/core';
-/**
- * @name Netmera Plugin
- * @description
- * This plugin does something
- *
- * @usage
- * ```typescript
- * import { NetmeraPlugin } from '@ionic-native/netmera-plugin';
- *
- *
- * constructor(private netmeraPlugin: NetmeraPlugin) { }
- *
- * ...
- *
- *
- * this.netmeraPlugin.functionName('Hello', 123)
- *   .then((res: any) => console.log(res))
- *   .catch((error: any) => console.error(error));
- *
- * ```
- */
 export declare class NetmeraPlugin extends IonicNativePlugin {
-    start(netmeraKey: string): void;
+    start(netmeraKey: string, fcmKey: string): void;
     requestPushNotificationAuthorization(): void;
+    subscribePushNotification(): Promise<NetmeraPush>;
+    subscribeOpenUrl(): Promise<string>;
+    subscribePushClick(): Promise<NetmeraPush>;
+    subscribePushButtonClick(): Promise<NetmeraPush>;
     sendEvent(event: NetmeraEvent): void;
     fetchInboxUsingFilter(filter: NetmeraInboxFilter): Promise<NetmeraInbox>;
     fetchNextPage(): Promise<NetmeraInbox>;
@@ -45,6 +28,7 @@ export interface NetmeraPush {
     pushType: number;
     inboxStatus: number;
     sendDate: any;
+    deeplinkUrl: string;
 }
 export interface NetmeraInbox {
     hasNextPage: boolean;
@@ -59,14 +43,16 @@ export declare enum NetmeraPushStatus {
     all = 7
 }
 export declare class NetmeraUser {
-    userId: any;
-    msisdn: any;
-    email: any;
-    pa: any;
+    private userId;
+    private msisdn;
+    private email;
+    private pa;
+    private pb;
     set setUserId(value: any);
     set setEmail(value: any);
     set setMsisdn(value: any);
     set name(value: string);
+    set surname(value: string);
 }
 export declare class NetmeraEvent {
 }
