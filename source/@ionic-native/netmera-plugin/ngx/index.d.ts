@@ -1,6 +1,6 @@
 import { IonicNativePlugin } from '@ionic-native/core';
 export declare class NetmeraPlugin extends IonicNativePlugin {
-    start(netmeraKey: string, fcmKey: string): void;
+    start(netmeraKey: string, fcmKey: string, baseUrl?: string): void;
     requestPushNotificationAuthorization(): void;
     subscribePushNotification(): Promise<NetmeraPush>;
     subscribeOpenUrl(): Promise<string>;
